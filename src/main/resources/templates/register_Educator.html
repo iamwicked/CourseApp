@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Educator Details</title>
+</head>
+<body>
+<h1>Please provide the following details.</h1>
+<form th:action="@{/register/EDUCATOR(username=${username})}" th:method="post" th:object="${educator}">
+    University: <input type="text" name="University" th:field="*{University}"><br>
+    Degree: <input type="text" name="Degree" th:field="*{Degree}"><br>
+    year: <input type="number" name="year" th:field="*{year}"><br>
+    Gender: <input type="text" name="Gender" th:field="*{Gender}"><br>
+    About: <input type="text" name="About" th:field="*{About}"><br>
+    Username of Admin: <input type="text" name="AdminUserName" th:field="*{AdminUserName}"><br>
+    <button type="submit">Register</button>
+</form>
+</body>
+</html>

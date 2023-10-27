@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${admin.getFName()+admin.getLName()}"> Profile</title>
+</head>
+<body>
+<h2>Pending Educators to be approved by you:</h2>
+<table>
+    <tr>
+        <th>User Name</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Approve button</th>
+    </tr>
+    <tr th:each="educator : ${educators}">
+        <td th:text="${educator.getUsername()}"></td>
+        <td th:text="${educator.getFName()}"></td>
+        <td th:text="${educator.getLName()}"></td>
+        <td><a th:href="@{/admin/approveeducator(educator=${educator.getUsername()})}">Approve</a></td>
+    </tr>
+</table>
+<h2>Pending Courses</h2>
+<table>
+    <tr>
+        <th>Teacher Name</th>
+        <th>Course Name</th>
+        <th>Approve button</th>
+    </tr>
+    <tr th:each="course : ${courses}">
+        <td th:text="${course.getFirst()}"></td>
+        <td th:text="${course.getSecond()}"></td>
+        <td><a th:href="@{/admin/approvecourse(course=${course.getSecond()})}">Approve</a></td>
+    </tr>
+</table>
+</body>
+</html>

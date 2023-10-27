@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Educators</title>
+</head>
+<body>
+<h2>Educator List</h2>
+<table>
+    <tr>
+        <td>User Name</td>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>Degree</td>
+        <td>University</td>
+        <td>Contacts</td>
+        <td th:if="${action == 1}">ADD button</td>
+    </tr>
+    <tr th:each="educator : ${educators}">
+        <td th:text="${educator.getUsername()}"></td>
+        <td th:text="${educator.getFName()}"></td>
+        <td th:text="${educator.getLName()}"></td>
+        <td th:text="${educator.getDegree()}"></td>
+        <td th:text="${educator.getUniversity()}"></td>
+        <td th:unless="${(educator.getEmails() == null) || educator.getEmails().isEmpty()}" th:text="${educator.getEmails().get(0)}"></td>
+        <td th:if="${(educator.getEmails() == null) || educator.getEmails().isEmpty()}"></td>
+        <td th:if="${action == 1}"><a th:href="@{/courses/course(index=${index}, ename=${educator.getUsername()})}">ADD</a></td>
+    </tr>
+</table>
+</body>
+</html>

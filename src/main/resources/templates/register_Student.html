@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Details</title>
+</head>
+<body>
+<h1>Please provide the following details.</h1>
+<form th:action="@{/register/STUDENT(username=${username})}" th:method="post" th:object="${student}">
+    College: <input type="text" name="College" th:field="*{College}"><br>
+    Degree: <input type="text" name="Degree" th:field="*{Degree}"><br>
+    Specialisation: <input type="text" name="Specialisation" th:field="*{Specialisation}"><br>
+    City: <input type="text" name="City" th:field="*{City}"><br>
+    State: <input type="text" name="State" th:field="*{State}"><br>
+    Pincode: <input type="number" name="Pincode" th:field="*{Pincode}"><br>
+    Age: <input type="number" name="Age" th:field="*{Age}"><br>
+    DOB: <input type="date" name="DOB" th:field="*{DOB}"><br>
+    <button type="submit">Register</button>
+</form>
+</body>
+</html>

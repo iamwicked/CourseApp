@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Courses</title>
+</head>
+<body>
+Search by category (categories are in lower case):<br>
+<form th:action="@{/courses/category}" method="post">
+    Category: <input type="text" name="category"><br>
+    <button type="submit">Search</button>
+</form>
+Search by course name(Case sensitive):<br>
+<form th:action="@{/courses/search}" method="post">
+    Search string: <input type="text" name="search"><br>
+    <button type="submit">Search</button>
+</form>
+<h1 th:if="${category != null}" th:text="${'Courses in the '+ category +' Category'}"></h1>
+<h1 th:if="${search != null}" th:text="${'Search results for '+ search}"></h1>
+<h2>Course List</h2>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Category</td>
+        <td>Rating</td>
+        <td>Price</td>
+        <td>Start</td>
+    </tr>
+    <tr th:each="course,i : ${courses}">
+        <td th:text="${course.getName()}"></td>
+        <td th:text="${course.getDescription()}"></td>
+        <td th:text="${course.getCategory()}"></td>
+        <td th:text="${course.getRating() != 0} ? ${course.getRating()} : 'Unrated'"></td>
+        <td th:text="${'Rs.' + course.getPrice()}"></td>
+        <td th:if="${bools.get(i.index)}"><a th:href="@{/courses/course(index=${i.index})}">Start</a></td>
+        <td th:unless="${bools.get(i.index)}"><a th:href="@{/courses/buy(index=${i.index})}">Buy</a></td>
+    </tr>
+</table>
+</body>
+</html>

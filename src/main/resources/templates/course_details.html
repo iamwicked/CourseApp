@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Details</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td th:unless="${role.equals('STUDENT')}"><a th:href="@{/courses/course(index=${index}, action='1')}">Add a teacher for this course</a></td>
+        <td th:if="${role.equals('ADMIN')}"><a th:href="@{/courses/course(index=${index}, action='2')}">Remove this course</a></td>
+    </tr>
+</table>
+<table th:object="${course}">
+    <tr>
+        <td>Name :</td>
+        <td th:text="*{Name}"></td>
+    </tr>
+    <tr>
+        <td>Description :</td>
+        <td th:text="*{Description}"></td>
+    </tr>
+    <tr>
+        <td>Rating :</td>
+        <td th:text="*{Rating}"></td>
+    </tr>
+    <tr>
+        <td>Price :</td>
+        <td th:text="*{Price}"></td>
+    </tr>
+    <tr>
+        <td>Category :</td>
+        <td th:text="*{Category}"></td>
+    </tr>
+    <tr>
+        <td>Teachers :</td>
+        <td><span th:each="teacher : *{teachers}" th:text="${teacher.getFName() + ' ' + teacher.getLName() + ', '}"></span></td>
+    </tr>
+</table>
+<p th:if="${course.getVideos().isEmpty()}">No Videos</p>
+<p th:unless="${course.getVideos().isEmpty()}">Videos</p>
+<table th:if="${!course.getVideos().isEmpty()}">
+    <tr th:each="video : ${course.getVideos()}">
+        <td><img th:alt="${'Thumbnail for video ' + video.getVideoID()}" th:src="${video.getThumbnailLink()}"></td>
+        <td th:text="${video.getTitle()}?: 'No Title'"></td>
+        <td><a th:href="@{/courses/video(cname=${course.getName()}, id=${video.getVideoID()})}">Watch</a></td>
+    </tr>
+</table>
+<p th:if="${course.getBlogs().isEmpty()}">No Blogs</p>
+<p th:unless="${course.getBlogs().isEmpty()}">Blogs</p>
+<table th:if="${!course.getBlogs().isEmpty()}">
+    <tr th:each="blog : ${course.getBlogs()}">
+        <td th:text="${blog.getTitle()}?: 'No Title'"></td>
+        <td><a th:href="@{/courses/blog(cname=${course.getName()}, id=${blog.getBlogID()})}">Read</a></td>
+    </tr>
+</table>
+</body>
+</html>

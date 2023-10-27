@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${educator.getFName() + educator.getLName()}"> Profile</title>
+</head>
+<body>
+<h2>Courses taught by you:</h2>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Category</td>
+        <td>Rating</td>
+        <td>Price</td>
+        <td>Start</td>
+    </tr>
+    <tr th:each="course,i : ${courses}">
+        <td th:text="${course.getName()}"></td>
+        <td th:text="${course.getDescription()}"></td>
+        <td th:text="${course.getCategory()}"></td>
+        <td th:text="${course.getRating() != 0} ? ${course.getRating()} : 'Unrated'"></td>
+        <td th:text="${'Rs.' + course.getPrice()}"></td>
+        <td><a th:href="@{/courses/course(index=${i.index})}">Visit</a></td>
+    </tr>
+</table>
+<a href="/courses/new">Add a new Course</a>
+</body>
+</html>
