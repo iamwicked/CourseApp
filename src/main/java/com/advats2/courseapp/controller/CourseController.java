@@ -230,7 +230,7 @@ public class CourseController {
         if(principal == null) {
             return "redirect:/login";
         }
-        if(!userRepository.findUser(principal.getName()).get().getRole().equals("EDUCATOR")) {
+        if(!"EDUCATOR".equals(userRepository.findUser(principal.getName()).get().getRole())) {
             return "redirect:/login";
         }
         Optional<Educator> educatorOptional = userRepository.findEducator(principal.getName());
@@ -247,7 +247,7 @@ public class CourseController {
         if(principal == null) {
             return "redirect:/login";
         }
-        if(!userRepository.findUser(principal.getName()).get().getRole().equals("EDUCATOR")) {
+        if(!"EDUCATOR".equals(userRepository.findUser(principal.getName()).get().getRole())) {
             return "redirect:/login";
         }
         Optional<Educator> educatorOptional = userRepository.findEducator(principal.getName());
